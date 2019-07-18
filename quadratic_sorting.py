@@ -1,3 +1,7 @@
+import time
+import random
+
+
 def insertion_sort(array):
     """Insertion sort"""
     for top in range(1, len(array)):
@@ -29,4 +33,9 @@ def bubble_sort(array):
 
 
 if __name__ == '__main__':
-    print(bubble_sort([4, -2, -3, 2, 5, -3, 1]))
+    m = [x for x in range(10000)]
+    random.shuffle(m)
+    start = time.monotonic()
+    insertion_sort(m)
+    end = time.monotonic()
+    print(end - start)

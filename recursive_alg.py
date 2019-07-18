@@ -34,5 +34,13 @@ def hanoi_towers(n, a, b, c):
         hanoi_towers(n - 1, b, a, c)
 
 
+def gen_bin(m, prefix=''):
+    if m == 0:
+        print(prefix)
+        return
+    gen_bin(m-1, prefix+'0')
+    gen_bin(m-1, prefix+'1')
+
+
 if __name__ == '__main__':
-    hanoi_towers(4, '1', '2', '3')
+    gen_bin(3)
