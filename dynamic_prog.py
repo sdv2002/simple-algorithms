@@ -27,9 +27,34 @@ def lcs(a, b):
                 c[i][j] = c[i - 1][j - 1] + 1
             else:
                 c[i][j] = max(c[i][j - 1], c[i - 1][j])
-    return c[-1][-1]
+    res = []
+    for x in range(len(c[-1])-1):
+        if c[-1][x] < c[-1][x+1]:
+            res.append(b[x])
+    return res
 
+
+def lis(a):
+    """Longest increasing subsequence"""
+    f = [0]*(len(a) + 1)
+    for i in range(1, len(a) + 1):
+        maximum = 0
+        for j in range(i):
+            if a[i-1] > a[j-1] and f[j] > maximum:
+                maximum = f[j]
+        f[i] = maximum + 1
+    res = []
+    i = f.index(max(f))
+    while i:
+        for j in range(1, i + 1):
+            if f[i] - f[i-j] == 1:
+                res.append(a[i-1])
+                i = i - j
+                break
+    res.reverse()
+    return res
 
 
 if __name__ == '__main__':
-    print(lcs('abcdrrrrr', 'acsd'))
+    print(*lis('akbclmn'), sep='')
+
