@@ -68,5 +68,30 @@ def levenshtein_distance(a, b):
     return f[-1][-1]
 
 
+def prefix(s):
+    """The length of the longest prefix of a substring
+    that is also the suffix of this substring."""
+    v = [0]*len(s)
+    for i in range(1, len(s)):
+        p = v[i-1]
+        while p > 0 and s[p] != s[i]:
+            p = v[p-1]
+        if s[p] == s[i]:
+            p = p + 1
+        v[i] = p
+    return v
+
+
+def kmp(w, s):
+    """Knuth–Morris–Pratt string-searching algorithm.
+    This algorithm wants to find the starting index m in string s
+    that matches the search word w"""
+    a = w + '#' + s
+    p = prefix(a)
+    if len(w) in p:
+        m = p.index(len(w)) - 2 * len(w)
+        return m
+
+
 if __name__ == '__main__':
-    print(levenshtein_distance('moloko', 'lokon'))
+    print(kmp('h', 'xjhvjhvb'))
