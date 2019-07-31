@@ -55,6 +55,18 @@ def lis(a):
     return res
 
 
-if __name__ == '__main__':
-    print(*lis('akbclmn'), sep='')
+def levenshtein_distance(a, b):
+    """String metric for measuring the difference between two sequences."""
+    f = [[i + j if i * j == 0 else 0 for j in range(len(b) + 1)]
+         for i in range(len(a) + 1)]
+    for i in range(1, len(a) + 1):
+        for j in range(1, len(b) + 1):
+            if a[i-1] == b[j-1]:
+                f[i][j] = f[i-1][j-1]
+            else:
+                f[i][j] = 1 + min(f[i-1][j], f[i][j-1], f[i-1][j-1])
+    return f[-1][-1]
 
+
+if __name__ == '__main__':
+    print(levenshtein_distance('moloko', 'lokon'))
