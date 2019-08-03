@@ -19,6 +19,8 @@ def euclidean(a, b):
 
 
 def quick_exponentiation(a, n):
+    """Exponentiating by squaring is a general method for fast
+    computation of large positive integer powers of a number."""
     if n == 0:
         return 1
     elif n % 2 == 1:  # n: odd
