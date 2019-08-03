@@ -1,3 +1,7 @@
+import itertools
+from pprint import pprint
+
+
 def fib(n):
     """Finding Fibonacci number with dynamic programming"""
     a = [0, 1] + [None] * (n - 2)
@@ -93,5 +97,40 @@ def kmp(w, s):
         return m
 
 
+def knapsack_dynamic_prog(m, v, max_mass):
+    """Knapsack problem. Given a set of items, each with a weight and a value,
+    determine the number of each item to include in a collection so that
+    the total weight is less than or equal to a given limit and
+    the total value is as large as possible."""
+    f = [[0] * (max_mass + 1) for _ in range(len(m) + 1)]
+    for i in range(1, len(m) + 1):
+        for j in range(1, max_mass + 1):
+            if m[i-1] <= j:
+                f[i][j] = max(f[i-1][j], v[i-1] + f[i-1][j - m[i-1]])
+            else:
+                f[i][j] = f[i-1][j]
+    return f[-1][-1]
+
+
+def knapsack_brute_force(m, v, max_mass):
+    """Search for the highest value of items in a knapsack by brute force"""
+    max_cost = 0
+    for i in range(1, len(m) + 1):
+        combinations = itertools.combinations(range(len(m)), i)
+        for combination in combinations:
+            set_cost = 0
+            set_mass = 0
+            for index in combination:
+                set_cost += v[index]
+                set_mass += m[index]
+            if set_mass <= max_mass:
+                if set_cost > max_cost:
+                    max_cost = set_cost
+    return max_cost
+
+
 if __name__ == '__main__':
-    print(kmp('h', 'xjhvjhvb'))
+    masses = [1, 5, 7, 1]
+    prices = [10, 20, 30, 15]
+    pprint(knapsack_dynamic_prog(masses, prices, 7))
+    print(knapsack_brute_force(masses, prices, 7))
