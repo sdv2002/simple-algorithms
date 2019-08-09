@@ -63,6 +63,7 @@ def heap_sort(array):
     # Slow version:
     # for i in range(len(array)):
     #    heap.insert(array.pop())
+    #
     # Fast version:
     heap.values = array[:]
     heap.size = len(array)
