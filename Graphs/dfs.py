@@ -18,6 +18,33 @@ def connect_component_search(graph):
     return n
 
 
+def dfs_using_stack(graph):
+    used = set()
+    stack = []
+    ccs = 0
+    for vertex in graph:
+        if vertex not in used:
+            stack.append(vertex)
+            while stack:
+                vertex = stack.pop()
+                used.add(vertex)
+                for neighbour in graph[vertex]:
+                    if neighbour not in used:
+                        stack.append(neighbour)
+            ccs += 1
+    return ccs
+
+
 if __name__ == '__main__':
     undirected_graph = dict(a={'b'}, b={'a', 'c'}, c={'b'}, d=set())
+    g2 = {'a': {'b', 'c'},
+          'b': {'a', 'd', 'e'},
+          'c': {'a', 'f', 'g'},
+          'd': {'b'},
+          'e': {'b', 'h'},
+          'f': {'c', 'k'},
+          'g': {'c'},
+          'h': {'e'},
+          'k': {'f'}}
     print(connect_component_search(undirected_graph))
+    print(dfs_using_stack(g2))
