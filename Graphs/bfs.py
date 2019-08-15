@@ -4,7 +4,7 @@ from pprint import pprint
 
 def bfs(graph, start_vertex, end_vertex):
     """Breadth-first search is an algorithm for traversing
-    or searching tree or graph data structures."""
+    and searching tree or graph data structures. O(V+E)"""
     distances = {vertex: None for vertex in graph}
     parents = {vertex: None for vertex in graph}
     path = []

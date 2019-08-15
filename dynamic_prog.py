@@ -3,7 +3,7 @@ from pprint import pprint
 
 
 def fib(n):
-    """Finding Fibonacci number with dynamic programming"""
+    """Finding Fibonacci number with dynamic programming. O(log n)"""
     a = [0, 1] + [None] * (n - 2)
     for i in range(2, n):
         a[i] = a[i - 1] + a[i - 2]
@@ -11,7 +11,7 @@ def fib(n):
 
 
 def number_of_trajectories(n, m):
-    """Calculate the number of ways to get into the cell (n,m)"""
+    """Calculate the number of ways to get into the cell (n,m). O(n*m)"""
     a = [[0] * (m + 1) for _ in range(n + 1)]
     a[1][1] = 1
     for i in range(1, n + 1):
@@ -23,7 +23,7 @@ def number_of_trajectories(n, m):
 
 
 def lcs(a, b):
-    """Longest common subsequence."""
+    """Longest common subsequence. O(n*m)"""
     c = [[0]*(len(b) + 1) for _ in range(len(a) + 1)]
     for i in range(1, len(a) + 1):
         for j in range(1, len(b) + 1):
@@ -39,7 +39,7 @@ def lcs(a, b):
 
 
 def lis(a):
-    """Longest increasing subsequence"""
+    """Longest increasing subsequence. O(n*m)"""
     f = [0]*(len(a) + 1)
     for i in range(1, len(a) + 1):
         maximum = 0
@@ -74,7 +74,7 @@ def levenshtein_distance(a, b):
 
 def prefix(s):
     """The length of the longest prefix of a substring
-    that is also the suffix of this substring."""
+    that is also the suffix of this substring. O(n)"""
     v = [0]*len(s)
     for i in range(1, len(s)):
         p = v[i-1]
@@ -89,7 +89,7 @@ def prefix(s):
 def kmp(w, s):
     """Knuth–Morris–Pratt string-searching algorithm.
     This algorithm wants to find the starting index m in string s
-    that matches the search word w"""
+    that matches the search word w. O(n)"""
     a = w + '#' + s
     p = prefix(a)
     if len(w) in p:

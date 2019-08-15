@@ -1,6 +1,6 @@
 def kosaraju(graph):
     """Kosaraju's algorithm is a linear time algorithm to find
-    the strongly connected components of a directed graph."""
+    the strongly connected components of a directed graph. O(V+E)"""
     used = set()
     stack = []
     for vertex in graph:

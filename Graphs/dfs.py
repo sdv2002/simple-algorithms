@@ -1,6 +1,6 @@
 def dfs(vertex, graph, used):
     """Depth-first search is an algorithm for traversing
-    or searching tree or graph data structures."""
+    and searching tree or graph data structures. O(V+E)"""
     used.add(vertex)
     for neighbour in graph[vertex]:
         if neighbour not in used:

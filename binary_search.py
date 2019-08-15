@@ -1,5 +1,5 @@
 def binary_search(a, key):
-    """searching for the element key in a sorted array a."""
+    """Searching for the element key in a sorted array a. O(log n)"""
     left = -1
     right = len(a)
     while (right - left) > 1:

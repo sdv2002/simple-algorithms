@@ -1,5 +1,5 @@
 def topological_sort(graph):
-    """Linear topological ordering of a directed graph"""
+    """Linear topological ordering of a directed graph. O(V+E)"""
     visited = set()
     ans = []
     for vertex in graph:

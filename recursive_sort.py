@@ -1,9 +1,8 @@
-import time
 import random
 
 
 def quick_sort(a):
-    """Sorting algorithm by Tony Hoare."""
+    """Sorting algorithm by Tony Hoare. O(n log n)"""
     if len(a) <= 1:
         return
     barrier = a[0]
@@ -25,7 +24,7 @@ def quick_sort(a):
 
 def merge_sort(a):
     """Merge sort is an efficient, general-purpose,
-        comparison-based sorting algorithm."""
+        comparison-based sorting algorithm. O(n log n)"""
     if len(a) <= 1:
         return
     middle = len(a) // 2
@@ -33,9 +32,7 @@ def merge_sort(a):
     right = a[middle:len(a)]
     merge_sort(left)
     merge_sort(right)
-    c = merge(left, right)
-    for i in range(len(a)):
-        a[i] = c[i]
+    a[:] = merge(left, right)
 
 
 def merge(arr_a: list, arr_b: list):
@@ -62,10 +59,12 @@ def merge(arr_a: list, arr_b: list):
 
 
 if __name__ == '__main__':
-    m = [x for x in range(100000)]
-    random.shuffle(m)
-    start = time.monotonic()
-    # quick_sort(m)
-    merge_sort(m)
-    end = time.monotonic()
-    print(end - start)
+    arr1 = [x for x in range(20)]
+    random.shuffle(arr1)
+    arr2 = [x for x in range(20)]
+    random.shuffle(arr2)
+    print(arr1, arr2)
+
+    quick_sort(arr1)
+    merge_sort(arr2)
+    print(arr1, arr2)
