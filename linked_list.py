@@ -23,6 +23,12 @@ class LinkedList:
             out += f' > {current.value}'
         return out + ']'
 
+    def __iter__(self):
+        current = self.first
+        while current:
+            yield current.value
+            current = current.next_item
+
     def add(self, x):
         """Add item to end of list."""
         if self.first is None:
@@ -124,16 +130,17 @@ class LinkedList:
 
     def reverse(self):
         """Invert linked list"""
-        if self.length == 0:
+        if self.length < 2:
             return
-        current = self.first
-        # self.first.next_item = None
         previous = None
-        while current.next_value is not None:
-            next = current.next_item
+        current = self.first
+        self.last = current
+        while current is not None:
+            nex = current.next_item
             current.next_item = previous
             previous = current
-            current = next
+            current = nex
+        self.first = previous
 
 
 if __name__ == '__main__':
@@ -141,13 +148,10 @@ if __name__ == '__main__':
     a.add('a')
     a.add('b')
     a.add('c')
-    a.add('d')
-    # a.push('e')
-    # a.push('f')
-    # a.insert('g', 0)
-    # a.insert('h', 7)
-    # print(a, f'Len = {a.length}')
-    # a.delete_by_index(1)
-    print(a, f'Len = {a.length}')
+    a.push('d')
+    a.insert('e', 1)
+    print(a)
     a.reverse()
-    print(a, f'Len = {a.length}')
+    print(a)
+    for el in a:
+        print(el, end=' ')
