@@ -1,23 +1,6 @@
 import random
 
 
-class LinkedList:
-    def __init__(self):
-        self._begin = None
-
-    def insert(self, e):
-        self._begin = [e, self._begin]
-
-    def pop(self):
-        try:
-            d = self._begin[0]
-            self._begin = self._begin[1]
-            return d
-        except TypeError:
-            print('List empty')
-            return None
-
-
 class Heap:
     def __init__(self):
         self.values = []
