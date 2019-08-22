@@ -1,29 +1,19 @@
-from queue import Queue
-
-
-class StackThroughQueue:
-    """Implementing a stack using a queue."""
+class QueueThroughStack:
+    """Implementing a queue using a stack."""
     def __init__(self):
-        self.q1 = Queue()
-        self.q2 = Queue()
+        self.stack_1 = []
+        self.stack_2 = []
 
-    def push(self, x):
-        if self.q1.empty():
-            self.q1.put(x)
-            while not self.q2.empty():
-                self.q1.put(self.q2.get())
-        else:
-            self.q2.put(x)
-            while not self.q1.empty():
-                self.q2.put(self.q1.get())
+    def enqueue(self, x):
+        while self.stack_1:
+            self.stack_2.append(self.stack_1.pop())
+        self.stack_1.append(x)
+        while self.stack_2:
+            self.stack_1.append(self.stack_2.pop())
 
-    def pop(self):
-        if not self.q1.empty():
-            return self.q1.get()
-        elif not self.q2.empty():
-            return self.q2.get()
-        else:
-            return None
+    def dequeue(self):
+        if self.stack_1:
+            return self.stack_1.pop()
 
 
 def is_brackets_correct(string):
@@ -124,7 +114,13 @@ def compute(x, y, operator):
 
 
 if __name__ == '__main__':
-    a = '( 2 + 10 ) / 2'
-    b = conversion_to_postfix(a)
-    print(a, '<=>', b)
-    print(calculation_postfix(b))
+    q = QueueThroughStack()
+    q.enqueue(1)
+    q.enqueue(2)
+    print(q.dequeue())
+    q.enqueue(3)
+    q.enqueue(4)
+    print(q.dequeue())
+    print(q.dequeue())
+    print(q.dequeue())
+    print(q.dequeue())
