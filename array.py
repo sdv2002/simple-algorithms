@@ -35,6 +35,14 @@ def reordering(array):
     return negative + positive
 
 
+def invert(array):
+    """Revers the list"""
+    length = len(array)
+    for i in range(length // 2):
+        array[i], array[length - i - 1] = array[length - i - 1], array[i]
+    return array
+
+
 if __name__ == '__main__':
     a = [1, 2, -10, 5, -20, 3, -30]
     print(reordering(a))
