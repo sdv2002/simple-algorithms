@@ -44,5 +44,20 @@ def gen_bin(m, prefix=''):
     gen_bin(m-1, prefix+'1')
 
 
+def generate_number(n: int, m: int, prefix=None, list_numbers=None):
+    """Generates all numbers in an n-ary (n <= 10) numeral system
+    of length m."""
+    prefix = prefix or []
+    list_numbers = list_numbers or []
+    if m == 0:
+        list_numbers.append(''.join(prefix))
+        return list_numbers
+    for digit in range(n):
+        prefix.append(str(digit))
+        generate_number(n, m - 1, prefix, list_numbers)
+        prefix.pop()
+
+
 if __name__ == '__main__':
-    gen_bin(3)
+    gen_bin(2)
+    print(generate_number(2, 2))
