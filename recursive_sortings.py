@@ -16,10 +16,7 @@ def quick_sort(a):
             right.append(x)
     quick_sort(left)
     quick_sort(right)
-    k = 0
-    for x in left + middle + right:
-        a[k] = x
-        k += 1
+    a[:] = left + middle + right
 
 
 def merge_sort(a):
@@ -35,27 +32,27 @@ def merge_sort(a):
     a[:] = merge(left, right)
 
 
-def merge(arr_a: list, arr_b: list):
+def merge(left: list, right: list):
     """Merging sorted arrays."""
-    i = k = n = 0
-    arr_c = [0] * (len(arr_a) + len(arr_b))
-    while i < len(arr_a) and k < len(arr_b):
-        if arr_a[i] <= arr_b[k]:
-            arr_c[n] = arr_a[i]
+    i = j = n = 0
+    result = [0] * (len(left) + len(right))
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result[n] = left[i]
             i += 1
         else:
-            arr_c[n] = arr_b[k]
-            k += 1
+            result[n] = right[j]
+            j += 1
         n += 1
-    while i < len(arr_a):
-        arr_c[n] = arr_a[i]
+    while i < len(left):
+        result[n] = left[i]
         i += 1
         n += 1
-    while k < len(arr_b):
-        arr_c[n] = arr_b[k]
-        k += 1
+    while j < len(right):
+        result[n] = right[j]
+        j += 1
         n += 1
-    return arr_c
+    return result
 
 
 if __name__ == '__main__':
