@@ -36,28 +36,41 @@ def hanoi_towers(n, a, b, c):
         hanoi_towers(n - 1, b, a, c)
 
 
-def gen_bin(m, prefix=''):
+def generate_binary_numbers(m: int, prefix=''):
+    """Generates all numbers of length m in binary notation."""
     if m == 0:
-        print(prefix)
+        print(prefix, end=' ')
         return
-    gen_bin(m-1, prefix+'0')
-    gen_bin(m-1, prefix+'1')
+    generate_binary_numbers(m-1, prefix+'0')
+    generate_binary_numbers(m-1, prefix+'1')
 
 
-def generate_number(n: int, m: int, prefix=None, list_numbers=None):
+def generate_numbers(n: int, m: int, prefix=None):
     """Generates all numbers in an n-ary (n <= 10) numeral system
     of length m."""
     prefix = prefix or []
-    list_numbers = list_numbers or []
     if m == 0:
-        list_numbers.append(''.join(prefix))
-        return list_numbers
+        print(*prefix, sep='', end=' ')
+        return
     for digit in range(n):
-        prefix.append(str(digit))
-        generate_number(n, m - 1, prefix, list_numbers)
+        prefix.append(digit)
+        generate_numbers(n, m - 1, prefix)
         prefix.pop()
 
 
+def generate_permutations(n: int, m=None, prefix=None):
+    """Generation of all permutations of n numbers in m positions."""
+    m = n if m is None else m
+    prefix = prefix or []
+    if m == 0:
+        print(*prefix, sep='', end=' ')
+        return
+    for number in range(1, n + 1):
+        if number not in prefix:
+            prefix.append(number)
+            generate_permutations(n, m - 1, prefix)
+            prefix.pop()
+
+
 if __name__ == '__main__':
-    gen_bin(2)
-    print(generate_number(2, 2))
+    generate_permutations(6)
