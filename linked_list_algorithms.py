@@ -18,9 +18,10 @@ class LinkedList:
             return 'Linked List: []'
         current = self.first
         out = f'Linked List: [{current.value}'
-        while current != self.last:
+        while current is not None:
             current = current.next_item
-            out += f' > {current.value}'
+            if current is not None:
+                out += f' > {current.value}'
         return out + ']'
 
     def __iter__(self):
@@ -143,15 +144,42 @@ class LinkedList:
         self.first = previous
 
 
+def loop_search(linked_list: LinkedList):
+    """Searches for a loop in a linked list."""
+    slow = linked_list.first
+    fast = linked_list.first
+    step = 0
+    while fast is not None:
+        if fast.next_item is None or fast.next_item.next_item is None:
+            print('No loop')
+            return
+        fast = fast.next_item.next_item
+        slow = slow.next_item
+        step += 1
+        if slow == fast:
+            break
+    slow = linked_list.first
+    while slow != fast:
+        fast = fast.next_item
+        slow = slow.next_item
+    print(f'Loop start: {slow.value}')
+
+
 if __name__ == '__main__':
     a = LinkedList()
     a.add('a')
     a.add('b')
     a.add('c')
-    a.push('d')
-    a.insert('e', 1)
-    print(a)
-    a.reverse()
-    print(a)
-    for el in a:
-        print(el, end=' ')
+    a.add('d')
+    a.add('e')
+    a.add('f')
+    # a.first.next_item.next_item.next_item.next_item.next_item = \
+    #     a.first.next_item.next_item
+    # print(a)
+    loop_search(a)
+    s = 20
+    for item in a:
+        print(item, end=' ')
+        s -= 1
+        if not s:
+            break
