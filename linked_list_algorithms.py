@@ -101,6 +101,7 @@ class LinkedList:
                 if count == i:
                     if current.next_item is None:
                         self.last = old
+                        old.next_item = None
                         break
                     else:
                         old.next_item = current.next_item
@@ -116,18 +117,22 @@ class LinkedList:
             return None
         current = self.first
         i = 0
+        index_list = []
         while current is not None:
             if current.value == x:
-                return i
+                index_list.append(i)
             current = current.next_item
             i += 1
-        return None
+        return index_list
 
     def delete_by_value(self, x):
-        i = self.search(x)
-        if i is None:
+        list_index = self.search(x)
+        if not list_index:
             return
-        self.delete_by_index(i)
+        offset = 0
+        for i in list_index:
+            self.delete_by_index(i - offset)
+            offset += 1
 
     def reverse(self):
         """Invert linked list"""
@@ -173,13 +178,9 @@ if __name__ == '__main__':
     a.add('d')
     a.add('e')
     a.add('f')
-    # a.first.next_item.next_item.next_item.next_item.next_item = \
-    #     a.first.next_item.next_item
-    # print(a)
-    loop_search(a)
-    s = 20
-    for item in a:
-        print(item, end=' ')
-        s -= 1
-        if not s:
-            break
+    a.add('c')
+    a.push('c')
+    print(a)
+    a.delete_by_value('c')
+    print(a)
+
