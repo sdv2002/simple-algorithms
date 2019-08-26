@@ -10,12 +10,12 @@ def dfs(vertex, graph, used):
 def connect_component_search(graph):
     """Search connected components of an undirected graph"""
     used = set()
-    n = 0
+    ccs = 0
     for vertex in graph:
         if vertex not in used:
             dfs(vertex, graph, used)
-            n += 1
-    return n
+            ccs += 1
+    return ccs
 
 
 def dfs_using_stack(graph):
@@ -36,15 +36,18 @@ def dfs_using_stack(graph):
 
 
 if __name__ == '__main__':
-    undirected_graph = dict(a={'b'}, b={'a', 'c'}, c={'b'}, d=set())
+    g1 = dict(a={'b'}, b={'a', 'c'}, c={'b'}, d=set())
     g2 = {'a': {'b', 'c'},
           'b': {'a', 'd', 'e'},
           'c': {'a', 'f', 'g'},
           'd': {'b'},
           'e': {'b', 'h'},
-          'f': {'c', 'k'},
-          'g': {'c'},
-          'h': {'e'},
-          'k': {'f'}}
-    print(connect_component_search(undirected_graph))
+          'f': {'c', 'i', 'g', 'h'},
+          'g': {'c', 'f'},
+          'h': {'e', 'f', 'i'},
+          'i': {'f', 'h'},
+          'j': {'k', 'l'},
+          'k': {'j', 'l'},
+          'l': {'j', 'k'}}
+    print(connect_component_search(g1))
     print(dfs_using_stack(g2))
