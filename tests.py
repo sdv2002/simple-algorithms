@@ -1,7 +1,7 @@
 import unittest
 from sympy import isprime
 from is_prime_number import is_prime
-from quadratic_sorting import *
+from quadratic_sortings import *
 from binary_search import binary_search
 
 
@@ -44,12 +44,6 @@ class TestCase(unittest.TestCase):
 class TestBinarySearch(unittest.TestCase):
 
     def testDuplicateElements(self):
-        """
-        Точно не знаю, должна ли функция возвращать результат 0 или 1.
-        В данный ситуации вернет 1, но можно дописать в коде условие,
-        чтобы проверяло, не является ли элемент слева таким же и тд.
-        И тогда вернуть крайний левый похожий элемент.
-        """
         self.assertEqual(binary_search([1, 1, 2, 2, 3, 3, 4], 1), 1,
                          'Problem with duplicate elements')
 
