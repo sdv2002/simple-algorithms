@@ -23,7 +23,7 @@ def bfs(graph, start_vertex, end_vertex):
         path.append(end_vertex)
         end_vertex = parents[end_vertex]
     path.append(start_vertex)
-    path[:] = path[::-1]
+    path = path[::-1]
 
     return [distances, parents, path]
 
